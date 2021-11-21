@@ -1,0 +1,25 @@
+
+###
+GET https://stacc-code-challenge-2021.azurewebsites.net/api/pep?name=Knut%20Arild%20Hareide
+Content-Type: application/json
+
+
+###
+GET https://stacc-code-challenge-2021.azurewebsites.net/api/roller?orgNr=988971375
+Content-Type: application/json
+
+###
+GET https://data.brreg.no/enhetsregisteret/api/enheter
+Content-Type: application/json
+
+###
+GET https://data.brreg.no/enhetsregisteret/api/enheter/ 
+Content-Type: application/json
+
+###
+GET https://data.brreg.no/enhetsregisteret/api/enheter/988971375/roller
+Content-Type: application/json
+
+###
+GET http://localhost:8080/api/company/test
+Content-Type: application/json
