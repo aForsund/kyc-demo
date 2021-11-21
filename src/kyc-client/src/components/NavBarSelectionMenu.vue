@@ -1,12 +1,13 @@
 <template>
   <div class="container">
     <div class="columns is-variable is-multiline is-3">
-      <button class="button is-primary">Search</button>
-      <button class="button is-primary">DashBoard</button>
-      <button class="button is-primary">Customers</button>
-      <button class="button is-primary">Reset DB</button>
+      <router-link class="button is-primary m-2" :to="{ name: 'search' }">Search
+      </router-link>
+      <button class="button is-primary m-2">DashBoard</button>
+      <button class="button is-primary m-2">Customers</button>
+      <button class="button is-primary m-2">Reset DB</button>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>

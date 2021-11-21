@@ -23,11 +23,9 @@
 </template>
 
 <script>
-//import { mapActions, mapGetters } from 'vuex';
+
 import NavBar from "@/components/NavBar.vue";
 import NavBarSelectionMenu from "@/components/NavBarSelectionMenu.vue";
-
-//import Notification from "@/components/Notification.vue";
 
 export default {
   components: {
