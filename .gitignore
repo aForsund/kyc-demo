@@ -32,7 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 
-
+# client 
 /src/kyc-client/.DS_Store
 /src/kyc-client/node_modules
 /src/kyc-client/dist
