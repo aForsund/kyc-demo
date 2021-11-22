@@ -1,13 +1,13 @@
 package com.example.kycdemo.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Company {
 
   String name;
   String number;
-  List<Person> persons = new ArrayList<>();
+  Set<Person> persons = new HashSet<>();
 
   public String getName() {
     return name;
@@ -25,12 +25,16 @@ public class Company {
     this.number = number;
   }
 
-  public List<Person> getPersons() {
+  public Set<Person> getPersons() {
     return persons;
   }
 
-  public void setPersons(List<Person> persons) {
+  public void setPersons(Set<Person> persons) {
     this.persons = persons;
+  }
+
+  public void addPerson(Person person) {
+    this.persons.add(person);
   }
 
   @Override

@@ -1,7 +1,13 @@
 package com.example.kycdemo.data.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.example.kycdemo.data.jsondeconstructionhelpers.CompanyResponse;
+import com.example.kycdemo.model.Birthdate;
 import com.example.kycdemo.model.Company;
+import com.example.kycdemo.model.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +26,15 @@ public class GetCompanyService {
     Company company = new Company();
 
     // Get JSON response and convert to CompanyResponse
-    CompanyResponse companyResponse = webClientBuilder.build().get()
-        .uri("https://data.brreg.no/enhetsregisteret/api/enheter/" + number + "/roller").retrieve()
-        .bodyToMono(CompanyResponse.class).block();
+    CompanyResponse companyResponse;
+    try {
+      companyResponse = webClientBuilder.build().get()
+          .uri("https://data.brreg.no/enhetsregisteret/api/enheter/" + number + "/roller").retrieve()
+          .bodyToMono(CompanyResponse.class).block();
+    } catch (Exception e) {
 
+      return null;
+    }
     // Get company name
     String name = "Dummy name";
 
@@ -32,12 +43,33 @@ public class GetCompanyService {
     company.setNumber(number);
 
     if (!companyResponse.getRollegrupper().isEmpty()) {
+      companyResponse.getRollegrupper().forEach(companyRoles -> {
+        if (!companyRoles.getRoller().isEmpty()) {
+          companyRoles.getRoller().forEach(companyRole -> {
+            Person person = new Person();
+            person.setTitle(companyRole.getType().getBeskrivelse());
+            person.setFirstName(companyRole.getPerson().getNavn().getFornavn());
+            person.setLastName(companyRole.getPerson().getNavn().getEtternavn());
+            Birthdate birthdate = new Birthdate();
+            List<String> dateArray = new ArrayList<>();
+            Arrays.stream(companyRole.getPerson().getFodselsdato().split("-")).forEach(item -> {
+              dateArray.add(item);
+            });
+            birthdate.setYear(Integer.parseInt(dateArray.get(0)));
+            birthdate.setMonth(Integer.parseInt(dateArray.get(1)));
+            birthdate.setDay(Integer.parseInt(dateArray.get(2)));
+            person.setDate(birthdate);
+            company.addPerson(person);
+          });
+        }
+      });
 
     }
     return company;
 
   }
 
+  // used for testing
   public Mono<CompanyResponse> getCompanyResponse(String number) throws Exception {
 
     Mono<CompanyResponse> companyResponse = webClientBuilder.build().get()

@@ -1,5 +1,5 @@
 package com.example.kycdemo.data.services;
 
-public class FetchCompanyNameService {
+public class GetCompanyNameService {
 
 }

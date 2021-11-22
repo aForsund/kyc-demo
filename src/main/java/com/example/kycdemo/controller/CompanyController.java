@@ -1,5 +1,7 @@
 package com.example.kycdemo.controller;
 
+import java.util.Objects;
+
 import com.example.kycdemo.data.jsondeconstructionhelpers.CompanyResponse;
 
 import com.example.kycdemo.data.services.GetCompanyService;
@@ -54,12 +56,12 @@ public class CompanyController {
     Company company;
     try {
       company = getCompanyService.getCompany(number);
-      return new ResponseEntity<Company>(company, HttpStatus.OK);
+
     } catch (Exception e) {
       e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
+    return new ResponseEntity<Company>(company, Objects.isNull(company) ? HttpStatus.NOT_FOUND : HttpStatus.OK);
   }
 
 }
