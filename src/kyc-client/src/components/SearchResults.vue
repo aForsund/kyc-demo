@@ -1,8 +1,8 @@
 <template>
   <div>
     
-    <p v-if="infoText != null">{{ infoText }}</p>
-    <div v-if="searchResults != null">
+    <h2 class="subtitle" v-if="infoText != null">{{ infoText }}</h2>
+    <div class="container" v-if="searchResults != null">
       <SearchResult  v-for="(result, index) in searchResults" :key="index" :result="result" />
     </div>
   </div>

@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     sendRequest() {
-      this.$emit("search-string", this.test);
+      this.$emit("search-string", this.text);
     }
   }
 };

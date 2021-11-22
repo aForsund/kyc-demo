@@ -18,7 +18,8 @@ export default {
   },
 
   getPerson(name) {
-    return apiClient.get("/api/user/" + name);
+    console.log("searching for " + name);
+    return apiClient.get("/api/pep?name=" + name);
   },
 
   getCompany(data) {
@@ -39,6 +40,6 @@ export default {
 
   getRoles(data) {
     console.log("searching for " + data);
-    return apiClient.get("/api/roller?orgNr=988971375");
+    return apiClient.get("/api/roller?orgNr=" + data);
   },
 };

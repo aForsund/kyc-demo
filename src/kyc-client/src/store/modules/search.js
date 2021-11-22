@@ -16,7 +16,7 @@ export const mutations = {
     state.searchResults = null;
   },
   UPDATE_SEARCH_RESULT_INFO_TEXT(state, text) {
-    state.infoText = "Showing results for " + text;
+    state.infoText = text;
   },
   CLEAR_SEARCH_RESULT_INFO_TEXT(state) {
     state.infoText = null;
@@ -25,21 +25,26 @@ export const mutations = {
 
 export const actions = {
   search({ commit }, data) {
-    API_Interface.getRoles(data)
-      .then((response) => {
-        console.log(response.data);
-        commit("UPDATE_SEARCH_RESULTS", response.data);
-        commit(
-          "UPDATE_SEARCH_RESULT_INFO_TEXT",
-          "Displaying result" + " add logic operator here " + "for " + data
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-        commit("CLEAR_SEARCH_RESULTS");
-        commit("UPDATE_SEARCH_RESULT_INFO_TEXT", err);
-      });
+
+    
+    (isNaN(data) ? API_Interface.getPerson(data) : API_Interface.getRoles(data))
+        .then((response) => {
+          console.log(response.data);
+          commit("UPDATE_SEARCH_RESULTS", response.data);
+          commit(
+            "UPDATE_SEARCH_RESULT_INFO_TEXT",
+            "Displaying result" + " add logic operator here " + "for " + data
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+          commit("CLEAR_SEARCH_RESULTS");
+          commit("UPDATE_SEARCH_RESULT_INFO_TEXT", err);
+        });
+    
+    
   },
+    
 };
 
 export const getters = {
