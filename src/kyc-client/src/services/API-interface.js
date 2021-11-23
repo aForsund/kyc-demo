@@ -14,13 +14,11 @@ const apiClient = axios.create({
 });
 
 export default {
-
-
   getPerson(name) {
     console.log("searching for " + name);
-    return apiClient.get("/api/pep?name=" + name);
+    return apiClient.get("/api/person/" + name);
+    //return apiClient.get("/api/person");
   },
-
   getRoles(data) {
     console.log("searching for " + data);
     return apiClient.get("/api/company/" + data);
