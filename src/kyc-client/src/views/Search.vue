@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="title">Search</h1>
+    <h2 class="subtitle">Search for company (8 digits) or name</h2>
     
     <SearchBar @search-string="performSearch" />
     <SearchResults />
