@@ -1,15 +1,30 @@
 package com.example.kycdemo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
 
-  private String firstName;
-  private String lastName;
+  private String name;
   private Birthdate date;
   private boolean isPEP;
   private String title;
+  private List<Dataset> dataset = new ArrayList<>();
 
   public Person() {
     this.isPEP = false;
+  }
+
+  public List<Dataset> getDataset() {
+    return dataset;
+  }
+
+  public void setDataset(List<Dataset> dataset) {
+    this.dataset = dataset;
+  }
+
+  public void addDataset(Dataset dataset) {
+    this.dataset.add(dataset);
   }
 
   public boolean isPEP() {
@@ -20,20 +35,12 @@ public class Person {
     this.isPEP = isPEP;
   }
 
-  public String getFirstName() {
-    return firstName;
+  public String getName() {
+    return name;
   }
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public String getLastName() {
-    return lastName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  public void setName(String name) {
+    this.name = name;
   }
 
   public Birthdate getDate() {
@@ -57,8 +64,7 @@ public class Person {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((date == null) ? 0 : date.hashCode());
-    result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-    result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
     return result;
   }
 
@@ -76,15 +82,10 @@ public class Person {
         return false;
     } else if (!date.equals(other.date))
       return false;
-    if (firstName == null) {
-      if (other.firstName != null)
+    if (name == null) {
+      if (other.name != null)
         return false;
-    } else if (!firstName.equals(other.firstName))
-      return false;
-    if (lastName == null) {
-      if (other.lastName != null)
-        return false;
-    } else if (!lastName.equals(other.lastName))
+    } else if (!name.equalsIgnoreCase(other.name))
       return false;
     return true;
   }

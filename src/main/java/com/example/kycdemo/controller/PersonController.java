@@ -1,7 +1,10 @@
 package com.example.kycdemo.controller;
 
-import com.example.kycdemo.data.jsondeconstructionhelpers.PersonResponse;
+import java.util.List;
+
 import com.example.kycdemo.data.services.GetPersonService;
+
+import com.example.kycdemo.model.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,16 +64,16 @@ public class PersonController {
    */
 
   @GetMapping("/{name}")
-  public ResponseEntity<PersonResponse> getPerson(@PathVariable String name) {
+  public ResponseEntity<List<Person>> getPerson(@PathVariable String name) {
 
-    PersonResponse responseJSON;
+    List<Person> personList;
     try {
-      responseJSON = getPersonService.getPerson(name);
+      personList = getPersonService.getPerson(name);
     } catch (Exception e) {
       e.printStackTrace();
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    return new ResponseEntity<PersonResponse>(responseJSON, HttpStatus.OK);
+    return new ResponseEntity<List<Person>>(personList, HttpStatus.OK);
   }
 }

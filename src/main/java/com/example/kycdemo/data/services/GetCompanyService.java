@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.example.kycdemo.data.jsondeconstructionhelpers.CompanyResponse;
+
 import com.example.kycdemo.model.Birthdate;
 import com.example.kycdemo.model.Company;
 import com.example.kycdemo.model.Person;
@@ -21,6 +22,12 @@ public class GetCompanyService {
   @Autowired
   private WebClient.Builder webClientBuilder;
 
+  @Autowired
+  private PEPValidationService pepService;
+
+  @Autowired
+  private GetPersonService getPersonService;
+
   public Company getCompany(String number) throws Exception {
 
     Company company = new Company();
@@ -35,7 +42,8 @@ public class GetCompanyService {
 
       return null;
     }
-    // Get company name
+    // Get company name - functionality not implemented for this (API call to brreg
+    // on company to get name)
     String name = "Dummy name";
 
     // Set Company details
@@ -48,11 +56,11 @@ public class GetCompanyService {
         if (!companyRoles.getRoller().isEmpty()) {
           companyRoles.getRoller().forEach(companyRole -> {
             Person person = new Person();
-            try{
-            person.setTitle(companyRole.getType().getBeskrivelse());
-            person.setFirstName(companyRole.getPerson().getNavn().getFornavn());
-            person.setLastName(companyRole.getPerson().getNavn().getEtternavn());
-            } catch(Exception e){
+            try {
+              person.setTitle(companyRole.getType().getBeskrivelse());
+              person.setName(companyRole.getPerson().getNavn().getFornavn() + " "
+                  + companyRole.getPerson().getNavn().getEtternavn());
+            } catch (Exception e) {
               e.printStackTrace();
             }
             Birthdate birthdate = new Birthdate();
@@ -64,7 +72,7 @@ public class GetCompanyService {
               birthdate.setYear(Integer.parseInt(dateArray.get(0)));
               birthdate.setMonth(Integer.parseInt(dateArray.get(1)));
               birthdate.setDay(Integer.parseInt(dateArray.get(2)));
-            } catch(Exception e){
+            } catch (Exception e) {
               e.printStackTrace();
             }
 
@@ -76,8 +84,27 @@ public class GetCompanyService {
     }
 
     // Validate persons in company
-    company.getPersons().forEach(person -> {
+    company.getPersons().forEach(companyPerson -> {
 
+      // Make API call for person and polymorph person objects to PEPerson objects
+
+      List<Person> personCheck = new ArrayList<Person>();
+      try {
+        personCheck = getPersonService.getPerson(companyPerson.getName());
+
+        if (!personCheck.isEmpty()) {
+          personCheck.forEach(item -> {
+
+            if (pepService.validatePEP(companyPerson, item)) {
+              companyPerson.setPEP(true);
+              companyPerson.setDataset(item.getDataset());
+            }
+
+          });
+        }
+      } catch (Exception e) {
+
+      }
     });
 
     return company;

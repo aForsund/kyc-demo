@@ -10,7 +10,7 @@
           <p
             class="has-text-weight-bold is-size-2 has-text-primary is-absolute"
           >
-            KYC demo application (Spring Boot running in Docker)
+            KYC demo application
           </p>
         </span>
       </div>
