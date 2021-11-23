@@ -42,6 +42,7 @@ public class GetCompanyService {
     company.setName(name);
     company.setNumber(number);
 
+    // Convert companyResponse to company
     if (!companyResponse.getRollegrupper().isEmpty()) {
       companyResponse.getRollegrupper().forEach(companyRoles -> {
         if (!companyRoles.getRoller().isEmpty()) {
@@ -63,8 +64,13 @@ public class GetCompanyService {
           });
         }
       });
-
     }
+
+    // Validate persons in company
+    company.getPersons().forEach(person -> {
+
+    });
+
     return company;
 
   }

@@ -1,7 +1,8 @@
 import axios from "axios";
 
-//const BASE_URL = "";
-const BASE_URL = "https://stacc-code-challenge-2021.azurewebsites.net";
+const BASE_URL = "";
+//const BASE_URL = "https://stacc-code-challenge-2021.azurewebsites.net";
+//const BASE_URL = "http://localhost:8080";
 
 const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -40,6 +41,6 @@ export default {
 
   getRoles(data) {
     console.log("searching for " + data);
-    return apiClient.get("/api/roller?orgNr=" + data);
+    return apiClient.get("/api/company/" + data);
   },
 };

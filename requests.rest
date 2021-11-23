@@ -25,5 +25,5 @@ GET http://localhost:8080/api/company/test
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/api/company/98897137
+GET http://localhost:8080/api/company/988971375
 Content-Type: application/json
