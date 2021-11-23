@@ -14,29 +14,11 @@ const apiClient = axios.create({
 });
 
 export default {
-  getUsers() {
-    return apiClient.get("/api/user");
-  },
+
 
   getPerson(name) {
     console.log("searching for " + name);
     return apiClient.get("/api/pep?name=" + name);
-  },
-
-  getCompany(data) {
-    return apiClient.get("/api/company/" + data);
-  },
-
-  registerUser(data) {
-    return apiClient.post("/api/auth/register", {
-      username: data.name,
-      email: data.email,
-      password: data.password,
-    });
-  },
-
-  search(data) {
-    return apiClient.get("/api/user/search/" + data);
   },
 
   getRoles(data) {

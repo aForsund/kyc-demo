@@ -48,17 +48,26 @@ public class GetCompanyService {
         if (!companyRoles.getRoller().isEmpty()) {
           companyRoles.getRoller().forEach(companyRole -> {
             Person person = new Person();
+            try{
             person.setTitle(companyRole.getType().getBeskrivelse());
             person.setFirstName(companyRole.getPerson().getNavn().getFornavn());
             person.setLastName(companyRole.getPerson().getNavn().getEtternavn());
+            } catch(Exception e){
+              e.printStackTrace();
+            }
             Birthdate birthdate = new Birthdate();
             List<String> dateArray = new ArrayList<>();
-            Arrays.stream(companyRole.getPerson().getFodselsdato().split("-")).forEach(item -> {
-              dateArray.add(item);
-            });
-            birthdate.setYear(Integer.parseInt(dateArray.get(0)));
-            birthdate.setMonth(Integer.parseInt(dateArray.get(1)));
-            birthdate.setDay(Integer.parseInt(dateArray.get(2)));
+            try {
+              Arrays.stream(companyRole.getPerson().getFodselsdato().split("-")).forEach(item -> {
+                dateArray.add(item);
+              });
+              birthdate.setYear(Integer.parseInt(dateArray.get(0)));
+              birthdate.setMonth(Integer.parseInt(dateArray.get(1)));
+              birthdate.setDay(Integer.parseInt(dateArray.get(2)));
+            } catch(Exception e){
+              e.printStackTrace();
+            }
+
             person.setDate(birthdate);
             company.addPerson(person);
           });

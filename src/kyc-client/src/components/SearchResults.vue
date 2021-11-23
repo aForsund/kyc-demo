@@ -7,7 +7,7 @@
         <Company :result="searchResults" />
       </div>
       <div v-else>
-        <SearchResult  v-for="(result, index) in searchResults" :key="index" :result="result" />
+        <PEP  v-for="(result, index) in searchResults" :key="index" :person="result" />
       </div>
     </div>
   </div>
@@ -16,12 +16,12 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import SearchResult from "./SearchResult.vue";
+import PEP from "./PEP.vue";
 import Company from "./Company.vue";
 
 export default {
   components: {
-    SearchResult,
+    PEP,
     Company
   },
   computed: {

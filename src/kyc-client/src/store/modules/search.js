@@ -33,7 +33,7 @@ export const actions = {
           commit("UPDATE_SEARCH_RESULTS", response.data);
           commit(
             "UPDATE_SEARCH_RESULT_INFO_TEXT",
-            "Displaying result" + " add logic operator here " + "for " + data
+            "Displaying result for " + data
           );
         })
         .catch((err) => {
