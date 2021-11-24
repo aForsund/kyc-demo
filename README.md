@@ -11,7 +11,11 @@ This project requires git, NPM, java and maven to run locally
 ```shell
 git clone https://github.com/aForsund/kyc-demo.git
 
-cd kyc-demo
+cd kyc-demo/src/kyc-client 
+
+npm install
+
+cd ../..
 
 mvnw package && java -jar target/kyc-demo-0.0.1-SNAPSHOT.jar
 ```
