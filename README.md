@@ -6,7 +6,7 @@ This is a demo application for a KYC use case.
 
 ## Installation
 
-This project requires git, NPM, java and maven to run locally
+This project requires git, NPM, java 11 and maven to run locally
 
 ```shell
 git clone https://github.com/aForsund/kyc-demo.git
