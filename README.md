@@ -22,7 +22,7 @@ mvnw package && java -jar target/kyc-demo-0.0.1-SNAPSHOT.jar
 
 ## About
 
-Dette prosjetet er laget med Vue.js front end og Spring Boot back end. Man kan søke på person eller selskap. Spring Boot kjører klienten og handterer spørringer mot brreg og stacc sin API for kodetesten for henholdsvis selskap og personer.
+Dette prosjektet er laget med Vue.js front end og Spring Boot back end. Man kan søke på person eller selskap. Spring Boot kjører klienten og handterer spørringer mot brreg og stacc sin API for kodetesten for henholdsvis selskap og personer.
 
 
 ### Søk på person
